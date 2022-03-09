@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  nft-generator:
+    build:
+      context: './docker/node/'
+    volumes:
+      - ${PROJECT_ROOT}/:/run/nftgen/
+    working_dir: /run/nftgen/
