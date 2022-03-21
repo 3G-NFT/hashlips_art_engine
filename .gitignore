@@ -140,3 +140,8 @@ dist
 # OSX
 
 .DS_Store
+
+# Configuration files
+src/config.js
+layers/*
+!layers/.gitkeep
