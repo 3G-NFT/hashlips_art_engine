@@ -177,7 +177,7 @@ const addAttributes = (_element) => {
   if(selectedElement.name.trim().toLowerCase()!=="none" && 
     selectedElement.name.trim().toLowerCase()!=="lineart" && 
     selectedElement.name.trim().toLowerCase()!=="eyesshadow" && 
-    selectedElement.name.trim().toLowerCase()!=="backgroundeffects" && 
+    selectedElement.name.trim().toLowerCase()!=="grunge" && 
     selectedElement.name.trim().toLowerCase()!=="shadows"){
     attributesList.push({
       trait_type: _element.layer.name,
