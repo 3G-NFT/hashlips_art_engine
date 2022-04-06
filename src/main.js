@@ -131,15 +131,16 @@ const drawBackground = () => {
 const addMetadata = (_dna, _edition) => {
   let dateTime = Date.now();
   let tempMetadata = {
-    name: `${namePrefix} #${_edition}`,
-    description: description,
+    //name: `${namePrefix} #${_edition}`,
+    //description: description,
     image: `${baseUri}/${_edition}.png`,
-    dna: sha1(_dna),
-    edition: _edition,
-    date: dateTime,
+
+    custom_fields: {
+    //  dna: sha1(_dna),
+      edition: _edition,
+    },
     ...extraMetadata,
     attributes: attributesList,
-    compiler: "HashLips Art Engine",
   };
   if (network == NETWORK.sol) {
     tempMetadata = {
@@ -173,10 +174,16 @@ const addMetadata = (_dna, _edition) => {
 
 const addAttributes = (_element) => {
   let selectedElement = _element.layer.selectedElement;
-  attributesList.push({
-    trait_type: _element.layer.name,
-    value: selectedElement.name,
-  });
+  if(selectedElement.name.trim().toLowerCase()!=="none" && 
+    selectedElement.name.trim().toLowerCase()!=="lineart" && 
+    selectedElement.name.trim().toLowerCase()!=="eyesshadow" && 
+    selectedElement.name.trim().toLowerCase()!=="backgroundeffects" && 
+    selectedElement.name.trim().toLowerCase()!=="shadows"){
+    attributesList.push({
+      trait_type: _element.layer.name,
+      value: selectedElement.name,
+    });
+  }
 };
 
 const loadLayerImg = async (_layer) => {
@@ -308,7 +315,7 @@ const writeMetaData = (_data) => {
 };
 
 const saveMetaDataSingleFile = (_editionCount) => {
-  let metadata = metadataList.find((meta) => meta.edition == _editionCount);
+  let metadata = metadataList.find((meta) => meta.custom_fields.edition == _editionCount);
   debugLogs
     ? console.log(
         `Writing metadata for ${_editionCount}: ${JSON.stringify(metadata)}`

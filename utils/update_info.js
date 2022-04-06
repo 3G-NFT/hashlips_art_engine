@@ -16,16 +16,16 @@ let data = JSON.parse(rawdata);
 
 data.forEach((item) => {
   if (network == NETWORK.sol) {
-    item.name = `${namePrefix} #${item.edition}`;
+    item.name = `${namePrefix} #${item.custom_fields.edition}`;
     item.description = description;
     item.creators = solanaMetadata.creators;
   } else {
-    item.name = `${namePrefix} #${item.edition}`;
+    item.name = `${namePrefix} #${item.custom_fields.edition}`;
     item.description = description;
-    item.image = `${baseUri}/${item.edition}.png`;
+    item.image = `${baseUri}/${item.custom_fields.edition}.png`;
   }
   fs.writeFileSync(
-    `${basePath}/build/json/${item.edition}.json`,
+    `${basePath}/build/json/${item.custom_fields.edition}.json`,
     JSON.stringify(item, null, 2)
   );
 });
