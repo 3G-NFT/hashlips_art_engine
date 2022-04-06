@@ -288,19 +288,44 @@ const isDnaUnique = (_DnaList = new Set(), _dna = "") => {
 
 const createDna = (_layers) => {
   let randNum = [];
+  let colour = '';
   _layers.forEach((layer) => {
     var totalWeight = 0;
-    layer.elements.forEach((element) => {
+    var layerElements = layer.elements;
+
+    if (colour != 'Bold' && layer.name == 'Beard') {
+      layerElements = layerElements.filter(element => element.name.includes(colour));
+    }
+
+    layerElements.forEach((element) => {
       totalWeight += element.weight;
     });
     // number between 0 - totalWeight
     let random = Math.floor(Math.random() * totalWeight);
-    for (var i = 0; i < layer.elements.length; i++) {
+    for (var i = 0; i < layerElements.length; i++) {
       // subtract the current weight from the random weight until we reach a sub zero value.
-      random -= layer.elements[i].weight;
+      random -= layerElements[i].weight;
       if (random < 0) {
+        if (layer.name == 'Hair') {
+          if (layer.elements[i].name.includes('Black')) {
+            colour = 'Black';
+          }
+
+          if (layer.elements[i].name.includes('Blond')) {
+            colour = 'Blond';
+          }
+
+          if (layer.elements[i].name.includes('Bold')) {
+            colour = 'Bold';
+          }
+
+          if (layer.elements[i].name.includes('Brown')) {
+            colour = 'Brown';
+          }
+        }
+        
         return randNum.push(
-          `${layer.elements[i].id}:${layer.elements[i].filename}${
+          `${layerElements[i].id}:${layerElements[i].filename}${
             layer.bypassDNA ? "?bypassDNA=true" : ""
           }`
         );
