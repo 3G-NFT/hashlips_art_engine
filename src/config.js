@@ -5,8 +5,8 @@ const { NETWORK } = require(`${basePath}/constants/network.js`);
 const network = NETWORK.eth;
 
 // General metadata for Ethereum
-const namePrefix = "Your Collection";
-const description = "Remember to replace this description";
+const namePrefix = "Skull Warrior";
+const description = "Collection of Skull Warriors";
 const baseUri = "ipfs://NewUriToReplace";
 
 const solanaMetadata = {
@@ -24,15 +24,21 @@ const solanaMetadata = {
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 5,
+    growEditionSizeTo: 10,
     layersOrder: [
       { name: "Background" },
-      { name: "Eyeball" },
-      { name: "Eye color" },
-      { name: "Iris" },
-      { name: "Shine" },
-      { name: "Bottom lid" },
-      { name: "Top lid" },
+      { name: "BackgroundEffects", options: { blend: MODE.multiply } },
+      { name: "Hair" },
+      { name: "Lineart" },
+      { name: "Skin" },
+      { name: "Armour" },
+      { name: "Shadows", options: { blend: MODE.multiply } },
+      { name: "Beard" },
+      { name: "Expressions" },
+      { name: "EyesShadow", options: { blend: MODE.multiply } },
+      { name: "Eyes" },
+      { name: "Skull" },
+      { name: "Weapon" },
     ],
   },
 ];
@@ -42,8 +48,8 @@ const shuffleLayerConfigurations = false;
 const debugLogs = false;
 
 const format = {
-  width: 512,
-  height: 512,
+  width: 1800,
+  height: 1800,
   smoothing: false,
 };
 
